@@ -38,6 +38,16 @@ public class TasksController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newTask);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable String id) throws NotFoundException {
+
+        Task existingTask = taskRepository.findById(id).orElse(null);
+        if (existingTask == null) {
+            throw new NotFoundException("Task not found");
+        }
+        return ResponseEntity.ok().body(existingTask);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable String id, @RequestBody @Valid EditTaskDTO task) throws NotFoundException {
         Task existingTask = taskRepository.findById(id).orElse(null);
@@ -51,5 +61,15 @@ public class TasksController {
         return ResponseEntity.ok(existingTask);
     }
 
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Task> deleteTask(@PathVariable String id) throws NotFoundException {
+        Task existingTask = taskRepository.findById(id).orElse(null);
+        if (existingTask == null) {
+            throw new NotFoundException("Task not found");
+        }
+        taskRepository.deleteById(existingTask.getId());
+        return ResponseEntity.ok().body(existingTask);
+    }
 
 }
