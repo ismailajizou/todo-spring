@@ -2,6 +2,7 @@ package com.example.todoapp.Models;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,7 +15,8 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "products")
+@Builder
+@Document(collection = "users")
 public class User {
     @Id
     private String id;
