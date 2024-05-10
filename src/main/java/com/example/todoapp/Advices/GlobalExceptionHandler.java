@@ -37,4 +37,15 @@ public class GlobalExceptionHandler {
         errorMap.put("message", exception.getMessage());
         return errorMap;
     }
+
+    //This method get triggered whenever there is Exception exception.
+    //It shows only the user friendly error message.
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public Map<String, String> handleException(Exception exception) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("message", exception.getMessage());
+        return errorMap;
+    }
+
 }
